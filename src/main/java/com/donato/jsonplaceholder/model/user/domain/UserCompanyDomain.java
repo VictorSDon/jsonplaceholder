@@ -1,4 +1,4 @@
-package com.donato.jsonplaceholder.model.album;
+package com.donato.jsonplaceholder.model.user.domain;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -7,16 +7,20 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Builder
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "album")
-public class AlbumDomain {
+@Table(name = "user_company")
+public class UserCompanyDomain {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    @Column(name = "title")
-    private String title;
+    @Column(name = "name")
+    private String name;
+    @Column(name = "catchPhrase")
+    private String catchPhrase;
+    @Column(name = "bs")
+    private String bs;
 }

@@ -27,7 +27,7 @@ public class AlbumController {
         AlbumResponse response = service.getById(id);
         return ResponseEntity.ok(response);
     }
-    @PostMapping("/{id}")
+    @PostMapping
 
     public ResponseEntity<AlbumResponse> create(@RequestBody AlbumRequest request){
         AlbumResponse response =service.create(request);

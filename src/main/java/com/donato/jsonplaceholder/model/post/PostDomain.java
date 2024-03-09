@@ -1,4 +1,4 @@
-package com.donato.jsonplaceholder.model.album;
+package com.donato.jsonplaceholder.model.post;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -7,16 +7,18 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Builder
 @Data
-@AllArgsConstructor
+@Builder
 @NoArgsConstructor
-@Table(name = "album")
-public class AlbumDomain {
+@AllArgsConstructor
+@Table(name = "post")
+public class PostDomain {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
     @Column(name = "title")
     private String title;
+    @Column(name = "body")
+    private String body;
 }

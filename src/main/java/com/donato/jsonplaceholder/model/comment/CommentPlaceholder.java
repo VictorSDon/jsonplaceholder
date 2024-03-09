@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Builder
 public class CommentPlaceholder {
+    private Long postId;
     private Long id;
     private String name;
     private String email;

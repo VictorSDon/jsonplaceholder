@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class AlbumPlaceholder {
+    private Long userId;
     private Long id;
     private String title;
 }

@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PostPlaceholder {
+    private Long userId;
     private Long id;
     private String title;
     private String body;

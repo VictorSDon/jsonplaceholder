@@ -39,6 +39,7 @@ public class UserService {
                         .street(request.getAddress().getStreet())
                         .suite(request.getAddress().getSuite())
                         .city(request.getAddress().getCity())
+                        .zipcode(request.getAddress().getZipcode())
                         .geo(UserAddressGeoDomain.builder()
                                 .lng(request.getAddress().getGeo().getLng())
                                 .lat(request.getAddress().getGeo().getLat()).build())
@@ -47,7 +48,7 @@ public class UserService {
                 .website(request.getWebsite())
                 .company(UserCompanyDomain.builder()
                         .name(request.getCompany().getName())
-                        .catchPhrase(request.getCompany().getCatchphrase())
+                        .catchphrase(request.getCompany().getCatchphrase())
                         .bs(request.getCompany().getBs()).build())
                 .build();
         domain = repository.save(domain);
@@ -63,6 +64,7 @@ public class UserService {
                         .street(request.getAddress().getStreet())
                         .suite(request.getAddress().getSuite())
                         .city(request.getAddress().getCity())
+                        .zipcode(request.getAddress().getZipcode())
                         .geo(UserAddressGeoDomain.builder()
                                 .lng(request.getAddress().getGeo().getLng())
                                 .lat(request.getAddress().getGeo().getLat()).build())
@@ -71,7 +73,7 @@ public class UserService {
                 .website(request.getWebsite())
                 .company(UserCompanyDomain.builder()
                         .name(request.getCompany().getName())
-                        .catchPhrase(request.getCompany().getCatchphrase())
+                        .catchphrase(request.getCompany().getCatchphrase())
                         .bs(request.getCompany().getBs()).build())
                 .build();
         domain = repository.save(domain);
@@ -88,6 +90,7 @@ public class UserService {
                         .street(domain.getAddress().getStreet())
                         .suite(domain.getAddress().getSuite())
                         .city(domain.getAddress().getCity())
+                        .zipcode(domain.getAddress().getZipcode())
                         .geo(UserAddressGeoResponse.builder()
                                 .lng(domain.getAddress().getGeo().getLng())
                                 .lat(domain.getAddress().getGeo().getLat()).build())
@@ -96,7 +99,7 @@ public class UserService {
                 .website(domain.getWebsite())
                 .company(UserCompanyResponse.builder()
                         .name(domain.getCompany().getName())
-                        .catchPhrase(domain.getCompany().getCatchPhrase())
+                        .catchphrase(domain.getCompany().getCatchphrase())
                         .bs(domain.getCompany().getBs()).build())
                 .build();
     }

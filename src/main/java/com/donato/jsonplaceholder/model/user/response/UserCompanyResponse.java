@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UserCompanyResponse {
     private String name;
-    private String catchPhrase;
+    private String catchphrase;
     private String bs;
 }

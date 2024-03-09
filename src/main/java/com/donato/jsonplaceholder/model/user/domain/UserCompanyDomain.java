@@ -20,7 +20,7 @@ public class UserCompanyDomain {
     @Column(name = "name")
     private String name;
     @Column(name = "catchPhrase")
-    private String catchPhrase;
+    private String catchphrase;
     @Column(name = "bs")
     private String bs;
 }

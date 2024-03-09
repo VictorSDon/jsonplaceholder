@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Builder
 public class PhotoPlaceholder {
+    private Long albumId;
     private Long id;
     private String title;
     private String url;

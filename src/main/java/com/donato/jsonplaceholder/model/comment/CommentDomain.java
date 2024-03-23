@@ -1,5 +1,6 @@
 package com.donato.jsonplaceholder.model.comment;
 
+import com.donato.jsonplaceholder.model.post.PostDomain;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,6 +22,10 @@ public class CommentDomain {
     private String name;
     @Column(name = "email")
     private String email;
-    @Column(name = "body")
+    @Column(name = "body", length = 511)
     private String body;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "postId", referencedColumnName = "id")
+    private PostDomain post;
+
 }

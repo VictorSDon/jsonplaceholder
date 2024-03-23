@@ -12,4 +12,5 @@ import lombok.NoArgsConstructor;
 public class TodoRequest {
     private String title;
     private Boolean completed;
+    private Long userId;
 }

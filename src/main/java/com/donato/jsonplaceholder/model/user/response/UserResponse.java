@@ -1,9 +1,16 @@
 package com.donato.jsonplaceholder.model.user.response;
 
+import com.donato.jsonplaceholder.model.album.AlbumResponse;
+import com.donato.jsonplaceholder.model.comment.CommentResponse;
+import com.donato.jsonplaceholder.model.photo.PhotoResponse;
+import com.donato.jsonplaceholder.model.post.PostResponse;
+import com.donato.jsonplaceholder.model.todo.TodoResponse;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
 @Builder
@@ -18,4 +25,7 @@ public class UserResponse {
     private String phone;
     private String website;
     private UserCompanyResponse company;
+    private List<TodoResponse> todos;
+    private List<PostResponse> posts;
+    private List<AlbumResponse> albums;
 }

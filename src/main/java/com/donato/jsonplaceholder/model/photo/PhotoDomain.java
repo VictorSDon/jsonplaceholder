@@ -1,5 +1,7 @@
 package com.donato.jsonplaceholder.model.photo;
 
+import com.donato.jsonplaceholder.model.album.AlbumDomain;
+import com.donato.jsonplaceholder.model.user.domain.UserDomain;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,4 +25,7 @@ public class PhotoDomain {
     private String url;
     @Column(name = "thumbnailUrl")
     private String thumbnailUrl;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "albumId", referencedColumnName = "id")
+    private AlbumDomain album;
 }

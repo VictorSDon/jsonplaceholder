@@ -3,7 +3,9 @@ package com.donato.jsonplaceholder.service;
 import com.donato.jsonplaceholder.model.album.AlbumDomain;
 import com.donato.jsonplaceholder.model.album.AlbumRequest;
 import com.donato.jsonplaceholder.model.album.AlbumResponse;
+import com.donato.jsonplaceholder.model.user.domain.UserDomain;
 import com.donato.jsonplaceholder.repository.jpa.AlbumRepository;
+import com.donato.jsonplaceholder.repository.jpa.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AlbumService {
     private final AlbumRepository repository;
+    private final UserRepository userRepository;
 
     public List<AlbumResponse> listAll(){
         List<AlbumDomain> domainlist = repository.findAll();
@@ -31,6 +34,8 @@ public class AlbumService {
     public AlbumResponse create(AlbumRequest request){
         AlbumDomain domain = AlbumDomain.builder()
                 .title(request.getTitle()).build();
+        UserDomain userDomain = userRepository.findById(request.getUserId()).orElseThrow();
+        domain.setUser(userDomain);
         domain = repository.save(domain);
         return parseDomainToResponse(domain);
     }

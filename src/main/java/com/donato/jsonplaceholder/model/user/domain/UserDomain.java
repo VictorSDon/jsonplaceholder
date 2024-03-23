@@ -1,10 +1,17 @@
 package com.donato.jsonplaceholder.model.user.domain;
 
+import com.donato.jsonplaceholder.model.album.AlbumDomain;
+import com.donato.jsonplaceholder.model.comment.CommentDomain;
+import com.donato.jsonplaceholder.model.photo.PhotoDomain;
+import com.donato.jsonplaceholder.model.post.PostDomain;
+import com.donato.jsonplaceholder.model.todo.TodoDomain;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Entity
 @Data
@@ -33,5 +40,12 @@ public class UserDomain {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "company_id", referencedColumnName = "id")
     private UserCompanyDomain company;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL)
+    private List<TodoDomain> todos;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL)
+    private List<PostDomain> posts;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL)
+    private List<AlbumDomain> albums;
+
 
 }

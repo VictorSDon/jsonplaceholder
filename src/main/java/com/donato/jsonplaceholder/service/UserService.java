@@ -1,5 +1,13 @@
 package com.donato.jsonplaceholder.service;
 
+import com.donato.jsonplaceholder.model.album.AlbumResponse;
+import com.donato.jsonplaceholder.model.comment.CommentDomain;
+import com.donato.jsonplaceholder.model.comment.CommentRequest;
+import com.donato.jsonplaceholder.model.comment.CommentResponse;
+import com.donato.jsonplaceholder.model.photo.PhotoResponse;
+import com.donato.jsonplaceholder.model.post.PostDomain;
+import com.donato.jsonplaceholder.model.post.PostResponse;
+import com.donato.jsonplaceholder.model.todo.TodoResponse;
 import com.donato.jsonplaceholder.model.user.domain.UserAddressDomain;
 import com.donato.jsonplaceholder.model.user.domain.UserAddressGeoDomain;
 import com.donato.jsonplaceholder.model.user.domain.UserCompanyDomain;
@@ -13,7 +21,9 @@ import com.donato.jsonplaceholder.repository.jpa.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -81,6 +91,41 @@ public class UserService {
     }
 
     public UserResponse parseDomainToResponse(UserDomain domain){
+        List<TodoResponse> todos = new ArrayList<>();
+        List<PostResponse> posts = new ArrayList<>();
+        List<AlbumResponse> albums = new ArrayList<>();
+        if (Objects.nonNull(domain.getTodos())) {
+            todos = domain.getTodos().stream().map(todoDomain -> TodoResponse.builder()
+                    .id(todoDomain.getId())
+                    .title(todoDomain.getTitle())
+                    .completed(todoDomain.getCompleted())
+                    .build()).toList();
+        }
+        if (Objects.nonNull(domain.getPosts())){
+            posts = domain.getPosts().stream().map(postDomain -> PostResponse.builder()
+                    .id(postDomain.getId())
+                    .title(postDomain.getTitle())
+                    .body(postDomain.getBody())
+                    .comments(Objects.isNull(postDomain.getComments()) ? new ArrayList<>() :
+                            postDomain.getComments().stream().map(commentDomain -> CommentResponse.builder()
+                            .name(commentDomain.getName())
+                            .body(commentDomain.getBody())
+                            .email(commentDomain.getEmail())
+                            .id(commentDomain.getId()).build()).toList())
+                    .build()).toList();
+        }
+        if (Objects.nonNull(domain.getAlbums())){
+            albums = domain.getAlbums().stream().map(albumDomain -> AlbumResponse.builder()
+                    .id(albumDomain.getId())
+                    .title(albumDomain.getTitle())
+                    .photos(Objects.isNull(albumDomain.getPhotos()) ? new ArrayList<>() :
+                    albumDomain.getPhotos().stream().map(photoDomain -> PhotoResponse.builder()
+                            .title(photoDomain.getTitle())
+                            .url(photoDomain.getUrl())
+                            .thumbnailUrl(photoDomain.getThumbnailUrl())
+                            .id(photoDomain.getId()).build()).toList())
+                    .build()).toList();
+        }
         return UserResponse.builder()
                 .id(domain.getId())
                 .name(domain.getName())
@@ -101,6 +146,9 @@ public class UserService {
                         .name(domain.getCompany().getName())
                         .catchphrase(domain.getCompany().getCatchphrase())
                         .bs(domain.getCompany().getBs()).build())
+                .todos(todos)
+                .posts(posts)
+                .albums(albums)
                 .build();
     }
 }

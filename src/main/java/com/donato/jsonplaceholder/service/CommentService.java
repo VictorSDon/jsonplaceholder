@@ -3,7 +3,9 @@ package com.donato.jsonplaceholder.service;
 import com.donato.jsonplaceholder.model.comment.CommentDomain;
 import com.donato.jsonplaceholder.model.comment.CommentRequest;
 import com.donato.jsonplaceholder.model.comment.CommentResponse;
+import com.donato.jsonplaceholder.model.post.PostDomain;
 import com.donato.jsonplaceholder.repository.jpa.CommentRepository;
+import com.donato.jsonplaceholder.repository.jpa.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CommentService {
     private final CommentRepository repository;
+    private final PostRepository postRepository;
 
     public List<CommentResponse> listAll(){
         List<CommentDomain> domainList = repository.findAll();
@@ -32,13 +35,15 @@ public class CommentService {
                 .name(request.getName())
                 .email(request.getEmail())
                 .body(request.getBody()).build();
+        PostDomain postDomain = postRepository.findById(request.getPostId()).orElseThrow();
+        domain.setPost(postDomain);
         domain = repository.save(domain);
         return parseDomainToResponse(domain);
     }
 
     public void deleteById(Long id){repository.deleteById(id);}
 
-    public CommentResponse uptade(CommentRequest request, Long id){
+    public CommentResponse update(CommentRequest request, Long id){
         CommentDomain domain = CommentDomain.builder()
                 .id(id)
                 .name(request.getName())

@@ -9,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.xml.stream.events.Comment;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -49,7 +48,7 @@ public class CommentController {
     @PutMapping("/{id}")
 
     public ResponseEntity<CommentResponse> update(@RequestBody CommentRequest request, @PathVariable Long id){
-        CommentResponse response = service.uptade(request, id);
+        CommentResponse response = service.update(request, id);
         return ResponseEntity.ok(response);
     }
 }

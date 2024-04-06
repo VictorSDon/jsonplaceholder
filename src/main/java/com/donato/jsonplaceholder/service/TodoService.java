@@ -41,7 +41,9 @@ public class TodoService {
         return parseDomainToResponse(domain);
     }
 
-    public void deleteById(Long id){repository.deleteById(id);}
+    public void deleteById(Long id){
+        repository.deleteById(id);
+    }
 
     public TodoResponse update(TodoRequest request, Long id){
         TodoDomain domain = TodoDomain.builder().id(id)
@@ -51,7 +53,7 @@ public class TodoService {
         return parseDomainToResponse(domain);
     }
 
-    public TodoResponse parseDomainToResponse(TodoDomain domain){
+    private TodoResponse parseDomainToResponse(TodoDomain domain){
         return TodoResponse.builder()
                 .id(domain.getId())
                 .title(domain.getTitle())

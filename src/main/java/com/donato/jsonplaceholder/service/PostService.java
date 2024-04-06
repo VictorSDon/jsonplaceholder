@@ -47,7 +47,11 @@ public class PostService {
     public void deleteById(Long id){repository.deleteById(id);}
 
     public PostResponse update(PostRequest request, Long id){
-        PostDomain domain = PostDomain.builder().id(id).title(request.getTitle()).body(request.getBody()).build();
+        PostDomain domain = PostDomain.builder()
+                .id(id)
+                .title(request.getTitle())
+                .body(request.getBody())
+                .build();
         domain = repository.save(domain);
         return parseDomainToResponse(domain);
     }

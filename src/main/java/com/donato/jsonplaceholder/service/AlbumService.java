@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+//regras de negocio
 @RequiredArgsConstructor
 public class AlbumService {
     private final AlbumRepository repository;

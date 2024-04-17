@@ -31,4 +31,16 @@ public class TodoObjectMother {
                 .user(UserObjectMother.domain())
                 .build();
     }
+    public static TodoPlaceholder todoPlaceholder(){
+        return TodoPlaceholder.builder()
+                .userId(12L)
+                .id(1L)
+                .completed(false)
+                .title("test_title")
+                .build();
+    }
+    public static TodoDomain parseTodo(){
+
+        return TodoDomain.builder().title("test_title").completed(false).build();
+    }
 }

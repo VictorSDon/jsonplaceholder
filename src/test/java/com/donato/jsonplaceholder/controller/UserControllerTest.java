@@ -1,8 +1,8 @@
 package com.donato.jsonplaceholder.controller;
 
-import com.donato.jsonplaceholder.model.comment.CommentObjectMother;
-import com.donato.jsonplaceholder.model.comment.CommentRequest;
-import com.donato.jsonplaceholder.service.CommentService;
+import com.donato.jsonplaceholder.model.user.UserObjectMother;
+import com.donato.jsonplaceholder.model.user.request.UserRequest;
+import com.donato.jsonplaceholder.service.UserService;
 import com.donato.jsonplaceholder.utils.TestUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,34 +17,31 @@ import org.springframework.test.web.servlet.MockMvc;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.mockito.Mockito.*;
-
 @ExtendWith(MockitoExtension.class)
-@WebMvcTest(CommentController.class)
-public class CommentControllerTest {
+@WebMvcTest(UserController.class)
+public class UserControllerTest {
     @Autowired
     private MockMvc mockMvc;
     @MockBean
-    private CommentService service;
+    private UserService service;
 
-    private CommentRequest request;
-
-
+    private UserRequest request;
 
     @BeforeEach
     public void setup(){
-        request = CommentObjectMother.request();
+        request = UserObjectMother.request();
     }
     @Test
     public void shouldListAll() throws Exception{
-        mockMvc.perform(get("/comment")
-                .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.ALL))
+        mockMvc.perform(get("/user")
+                .accept(MediaType.ALL)
+                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
         verify(service).listAll();
     }
     @Test
     public void shouldGetById() throws Exception{
-        mockMvc.perform(get("/comment/1")
+        mockMvc.perform(get("/user/1")
                 .accept(MediaType.ALL)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
@@ -52,25 +49,27 @@ public class CommentControllerTest {
     }
     @Test
     public void shouldCreate() throws Exception{
-        mockMvc.perform(post("/comment")
-                .accept(MediaType.ALL).content(TestUtils.asJsonString(request))
+        mockMvc.perform(post("/user")
+                .accept(MediaType.ALL)
+                .content(TestUtils.asJsonString(request))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated());
         verify(service).create(request);
     }
     @Test
     public void shouldDelete() throws Exception{
-        mockMvc.perform(delete("/comment/1")
+        mockMvc.perform(delete("/user/1")
                 .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.ALL)).andExpect(status().isNoContent());
+                .accept(MediaType.ALL)).andExpect(status()
+                .isNoContent());
         verify(service).deleteById(1L);
     }
     @Test
     public void shouldUpdate() throws Exception{
-        mockMvc.perform(put("/comment/1")
+        mockMvc.perform(put("/user/1")
                 .accept(MediaType.ALL)
-                .content(TestUtils.asJsonString(request))
-                .contentType(MediaType.APPLICATION_JSON))
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(TestUtils.asJsonString(request)))
                 .andExpect(status().isOk());
         verify(service).update(request, 1L);
     }

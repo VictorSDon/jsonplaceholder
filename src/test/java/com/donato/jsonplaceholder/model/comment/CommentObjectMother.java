@@ -35,4 +35,18 @@ public class CommentObjectMother {
                 .post(PostObjectMother.domain())
                 .build();
     }
+    public static CommentPlaceholder commentPlaceholder(){
+        return CommentPlaceholder.builder()
+                .postId(9L)
+                .id(1L)
+                .email("test_email")
+                .name("test_name")
+                .body("test_body").build();
+    }
+    public static CommentDomain parseComment(){
+        return CommentDomain.builder()
+                .name("test_name")
+                .email("test_email")
+                .body("test_body").build();
+    }
 }

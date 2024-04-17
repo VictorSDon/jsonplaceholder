@@ -1,13 +1,15 @@
 package com.donato.jsonplaceholder.model.album;
 
+import com.donato.jsonplaceholder.model.photo.PhotoObjectMother;
 import com.donato.jsonplaceholder.model.user.UserObjectMother;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class AlbumObjectMother {
     public static AlbumDomain albumDomain(){
         return AlbumDomain.builder()
-                .id(12L)
+                .id(123L)
                 .title("test_title")
                 .photos(new ArrayList<>())
                 .build();
@@ -35,5 +37,16 @@ public class AlbumObjectMother {
                 .title("test_title")
                 .user(UserObjectMother.domain())
                 .build();
+    }
+    public static AlbumPlaceholder albumPlaceholder(){
+        return AlbumPlaceholder.builder()
+                .userId(12L)
+                .id(1L)
+                .title("test_title").build();
+    }
+    public static AlbumDomain parseAlbum(){
+        return AlbumDomain.builder()
+                .title("test_title")
+                .photos(List.of(PhotoObjectMother.parsePhoto())).build();
     }
 }

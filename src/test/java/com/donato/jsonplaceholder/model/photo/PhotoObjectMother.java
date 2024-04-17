@@ -35,4 +35,16 @@ public class PhotoObjectMother {
                 .thumbnailUrl("test_thumbnailUrl")
                 .build();
     }
+    public static PhotoPlaceholder photoPlaceholder(){
+        return PhotoPlaceholder.builder().albumId(13L).id(1L)
+                .title("test_title")
+                .url("test_url")
+                .thumbnailUrl("test_thumbnailUrl").build();
+    }
+    public static PhotoDomain parsePhoto(){
+        return PhotoDomain.builder()
+                .title("test_title")
+                .url("test_url")
+                .thumbnailUrl("test_thumbnail").build();
+    }
 }

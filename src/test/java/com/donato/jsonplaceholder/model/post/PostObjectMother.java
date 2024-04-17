@@ -1,8 +1,10 @@
 package com.donato.jsonplaceholder.model.post;
 
+import com.donato.jsonplaceholder.model.comment.CommentObjectMother;
 import com.donato.jsonplaceholder.model.user.UserObjectMother;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class PostObjectMother {
     public static PostDomain domain(){
@@ -33,5 +35,18 @@ public class PostObjectMother {
                 .body("test_body")
                 .title("test_title")
                 .build();
+    }
+    public static PostPlaceholder postPlaceholder(){
+        return PostPlaceholder.builder()
+                .userId(12L)
+                .id(1L)
+                .body("test_body")
+                .title("test_title").build();
+    }
+    public static PostDomain parsePost(){
+        return PostDomain.builder()
+                .title("test_title")
+                .body("test_body")
+                .comments(List.of(CommentObjectMother.parseComment())).build();
     }
 }
